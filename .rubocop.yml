@@ -1,0 +1,40 @@
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+plugins:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "node_modules/**/*"
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "vendor/**/*"
+    - "public/**/*"
+
+# Enforce frozen_string_literal: true
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always_true
+  Exclude:
+    - "db/schema.rb"
+    - "db/migrate/*.rb"
+    - "bin/**/*"
+    - "config.ru"
+
+# Relax some Rails defaults that can be annoying in development
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "config/routes.rb"
+    - "config/environments/*.rb"
+
+# RSpec specific tweaks
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/MultipleExpectations:
+  Max: 5
